@@ -3,7 +3,6 @@ import { View } from 'react-native';
 import { TextInput, Button, List, IconButton } from 'react-native-paper';
 import { handleAdd, handleDelete } from '../../utils/utils';
 import { styles } from '../../Styles/styles';
-import { Modal } from './Modal';
 
 export const MyComponent = () => {
     const [text, setText] = useState('');
@@ -16,18 +15,30 @@ export const MyComponent = () => {
             <View key={item.id} style={styles.itemContainer}>
                 <List.Item
                     title={item.name}
-                    titleStyle={styles.name}
-                    left={() => <List.Icon icon="account-circle"/>}
+                    titleStyle={item.completed ? [styles.name, styles.completed] : styles.name}
+                    left={() => <List.Icon icon="account-circle" />}
                 />
                 <IconButton
                     icon="delete"
-                    iconColor='#a94b4b'
-                    size={26} 
+                    iconColor="#a94b4b"
+                    size={26}
                     onPress={() => {
-                        setSelectedItemId(item.id); // Al presionar el botón, actualiza el ID seleccionado
-                        setModalDelete(true); // Abre el modal de eliminación
+                        setSelectedItemId(item.id);
+                        setModalDelete(true);
                     }}
-                    style={styles.deleteButton} 
+                    style={styles.deleteButton}
+                />
+                <IconButton
+                    icon={item.completed ? 'check-circle' : 'circle-outline'}
+                    iconColor={item.completed ? '#4CAF50' : '#757575'}
+                    size={26}
+                    onPress={() => {
+                        const updatedNames = names.map((n) =>
+                            n.id === item.id ? { ...n, completed: !n.completed } : n
+                        );
+                        setNames(updatedNames);
+                    }}
+                    style={styles.completedButton}
                 />
             </View>
         ));
@@ -43,7 +54,7 @@ export const MyComponent = () => {
                         onChangeText={(text) => setText(text)}
                         style={styles.input}
                     />
-                    <Button mode="contained" onPress={()=>{handleAdd(text, names, setNames, setText)}}>
+                    <Button mode="contained" onPress={() => handleAdd(text, names, setNames, setText)}>
                         Añadir
                     </Button>
                 </View>
@@ -58,7 +69,7 @@ export const MyComponent = () => {
                     handleDelete={() => {
                         if (selectedItemId) {
                             handleDelete(selectedItemId, names, setNames);
-                            setModalDelete(false); 
+                            setModalDelete(false);
                         }
                     }}
                 />
