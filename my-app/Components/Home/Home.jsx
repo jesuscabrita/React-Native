@@ -1,51 +1,19 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
+import { ScrollView, Text, View } from 'react-native';
 import { TextInput, Button, List, IconButton } from 'react-native-paper';
 import { handleAdd, handleDelete } from '../../utils/utils';
 import { styles } from '../../Styles/styles';
+import { Modal } from '../Shared/Modal';
+import { ListNames } from './ListNames';
 
-export const MyComponent = () => {
+export const Home = () => {
     const [text, setText] = useState('');
     const [names, setNames] = useState([]);
     const [modalDelete, setModalDelete] = useState(false);
     const [selectedItemId, setSelectedItemId] = useState(null);
 
-    const renderNames = () => {
-        return names.map((item) => (
-            <View key={item.id} style={styles.itemContainer}>
-                <List.Item
-                    title={item.name}
-                    titleStyle={item.completed ? [styles.name, styles.completed] : styles.name}
-                    left={() => <List.Icon icon="account-circle" />}
-                />
-                <IconButton
-                    icon="delete"
-                    iconColor="#a94b4b"
-                    size={26}
-                    onPress={() => {
-                        setSelectedItemId(item.id);
-                        setModalDelete(true);
-                    }}
-                    style={styles.deleteButton}
-                />
-                <IconButton
-                    icon={item.completed ? 'check-circle' : 'circle-outline'}
-                    iconColor={item.completed ? '#4CAF50' : '#757575'}
-                    size={26}
-                    onPress={() => {
-                        const updatedNames = names.map((n) =>
-                            n.id === item.id ? { ...n, completed: !n.completed } : n
-                        );
-                        setNames(updatedNames);
-                    }}
-                    style={styles.completedButton}
-                />
-            </View>
-        ));
-    };
-
     return (
-        <>
+        <ScrollView>
             <View style={styles.container}>
                 <View style={styles.inputContainer}>
                     <TextInput
@@ -59,7 +27,16 @@ export const MyComponent = () => {
                     </Button>
                 </View>
                 <View style={styles.listContainer}>
-                    <List.Section>{renderNames()}</List.Section>
+                    {names.length === 0 ? (
+                        <View style={styles.emptyListContainer}>
+                            <Text style={styles.emptyListText}>No hay personas</Text>
+                            <IconButton icon="account-remove" size={30} color="#000" />
+                        </View>
+                    ) : (
+                        <List.Section>
+                            <ListNames names={names} setModalDelete={setModalDelete} setNames={setNames} setSelectedItemId={setSelectedItemId} />
+                        </List.Section>
+                    )}
                 </View>
             </View>
             {modalDelete && (
@@ -74,6 +51,6 @@ export const MyComponent = () => {
                     }}
                 />
             )}
-        </>
+        </ScrollView>
     );
 };

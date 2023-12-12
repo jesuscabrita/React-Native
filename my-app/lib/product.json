@@ -1,0 +1,58 @@
+[
+    {
+        "id": 1,
+        "title": "Portatil HP",
+        "category": "Electronicos",
+        "image": "https://tienda.anywayinsumos.com.ar/20735-thickbox_default/notebook-intel-i5-13420h-hp-victus-8gb-ddr4-512gb-ssd-156fhd-1920x1080-nvidia-geforce-rtx-3050-4gb-vram-color-blue-english.jpg",
+        "price": 899.99,
+        "description": "Portátil HP con pantalla de 15.6 pulgadas, procesador Intel Core i5, 8 GB de RAM y 256 GB de almacenamiento SSD."
+    },
+    {
+        "id": 2,
+        "title": "Camara Canon EOS",
+        "category": "Electronicos",
+        "image": "https://i.blogs.es/d2d48d/canon_eos500d/450_1000.jpg",
+        "price": 649.99,
+        "description": "Cámara digital Canon EOS con sensor de 24.2 megapíxeles, grabación de video en Full HD y pantalla táctil de 3 pulgadas."
+    },
+    {
+        "id": 3,
+        "title": "Silla de Oficina Ergonomica",
+        "category": "Muebles",
+        "image": "https://ergosit.com.ar/wp-content/uploads/2016/11/silla-ergonomica-soul-black.jpg",
+        "price": 129.99,
+        "description": "Silla de oficina ergonómica con soporte lumbar ajustable, reposabrazos acolchados y altura regulable."
+    },
+    {
+        "id": 4,
+        "title": "Libro: 'El Principito'",
+        "category": "Libros",
+        "image": "https://www.laesferaazul.com/wp-content/uploads/2022/09/Descubrir-el-Principito-812x1024.jpg",
+        "price": 19.99,
+        "description": "Edición especial del clásico libro 'El Principito' de Antoine de Saint-Exupéry con ilustraciones originales."
+    },
+    {
+        "id": 5,
+        "title": "Smartphone Samsung Galaxy",
+        "category": "Electronicos",
+        "image": "https://images.fravega.com/f500/547ced1d55675919b2e1cc515ba027c9.jpg",
+        "price": 699.99,
+        "description": "Smartphone Samsung Galaxy con pantalla Super AMOLED, cámara de 64 MP y 128 GB de almacenamiento."
+    },
+    {
+        "id": 6,
+        "title": "Mesa de Comedor",
+        "category": "Muebles",
+        "image": "https://images.hola.com/imagenes/decoracion/20211216201057/mesas-de-comedor-ideas-decoracion-am/1-29-461/decoracion-mesa-comedor-12a-a.jpg",
+        "price": 299.99,
+        "description": "Mesa de comedor moderna con superficie de vidrio y patas de acero inoxidable."
+    },
+    {
+        "id": 7,
+        "title": "Zapatos Deportivos Nike",
+        "category": "Ropa y Calzado",
+        "image": "https://i.pinimg.com/originals/eb/d8/62/ebd86287ad78aac49e8d00c84ea2b6e3.jpg",
+        "price": 129.99,
+        "description": "Zapatos deportivos Nike con tecnología Air Max para mayor comodidad y amortiguación."
+    }
+]

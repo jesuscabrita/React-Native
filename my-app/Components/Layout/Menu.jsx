@@ -1,31 +1,31 @@
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { NavigationContainer } from '@react-navigation/native';
-import { MyComponent } from "../Shared/MyComponent";
-import { Screen2Component } from "../Shared/Screen2Component";
+import { Home } from "../Home/Home";
+import { Productos } from "../Productos/Productos";
 
 const Tab = createMaterialBottomTabNavigator();
 
-export const Menu = () => {
+export const Menu = ( { activeScreen, onTabPress }) => {
     return(
-        <NavigationContainer>
-            <Tab.Navigator>
-                <Tab.Screen
-                    name="Home"
-                    component={MyComponent}
-                    options={{
-                    tabBarLabel: 'Home',
-                    tabBarIcon: 'home',
-                    }}
-                />
-                <Tab.Screen
-                    name="Screen2"
-                    component={Screen2Component}
-                    options={{
-                    tabBarLabel: 'Screen 2',
-                    tabBarIcon: 'page-layout-body',
-                    }}
-                />
-            </Tab.Navigator>
-        </NavigationContainer>
+      <NavigationContainer>
+        <Tab.Navigator>
+          <Tab.Screen
+            name="Home"
+            component={Home}
+            options={{ tabBarLabel: 'Home', tabBarIcon: 'home'}}
+            listeners={({ navigation }) => ({
+              tabPress: (e) => {onTabPress('Home')},
+            })}
+          />
+          <Tab.Screen
+            name="Productos"
+            component={Productos}
+            options={{ tabBarLabel: 'Productos',tabBarIcon: 'page-layout-body'}}
+            listeners={({ navigation }) => ({
+              tabPress: (e) => {onTabPress('Productos')},
+            })}
+          />
+        </Tab.Navigator>
+      </NavigationContainer>
     )
 }

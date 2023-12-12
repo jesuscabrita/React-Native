@@ -29,6 +29,17 @@ export const styles = StyleSheet.create({
     },
     name: {
         fontSize: 20,
+        width:'130px'
+    },
+    emptyListContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 20,
+    },
+    emptyListText: {
+        fontSize: 18,
+        color: '#555',
     },
 });
 
@@ -39,6 +50,7 @@ export const StylesScreen2 = StyleSheet.create({
         alignItems: 'center',
         flexDirection: 'column',
         padding: 20,
+        gap:'20px'
     }
 })
 
