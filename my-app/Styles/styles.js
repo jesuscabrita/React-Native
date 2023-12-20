@@ -69,3 +69,46 @@ export const stylesModalDelete = StyleSheet.create({
         fontFamily: 'Montserrat_400Bold'
     },
 })
+
+export const stylesDetalle = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#f5f5f5',
+    },
+    card: {
+        margin: 16,
+        borderRadius: 8,
+        elevation: 4,
+    },
+    cardImage: {
+        height: 200,
+        borderTopLeftRadius: 8,
+        borderTopRightRadius: 8,
+    },
+    cardTitle: {
+        fontFamily: 'Montserrat_700Bold',
+        fontSize: 24,
+        marginBottom: 8,
+    },
+    cardCategory: {
+        fontFamily: 'Montserrat_400Regular',
+        color: '#4CAF50',
+        marginBottom: 4,
+    },
+    cardDescription: {
+        fontFamily: 'Montserrat_400Regular',
+        fontSize: 16,
+        marginBottom: 12,
+    },
+    cardPrice: {
+        fontFamily: 'Montserrat_700Bold',
+        fontSize: 18,
+        color: '#4CAF50',
+    },
+    actionsContainer: {
+        margin: 16,
+    },
+    addToCartButton: {
+        backgroundColor: '#4CAF50',
+    },
+});

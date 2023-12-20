@@ -5,7 +5,7 @@ import { TextInput, IconButton, Chip, Button, Text, SegmentedButtons } from 'rea
 import data from '../../lib/product.json';
 import { Cards } from './Cards';
 
-export const Productos = () => {
+export const Productos = ({ navigation }) => {
     const [searchTerm, setSearchTerm] = useState('');
     const [filteredData, setFilteredData] = useState([]);
     const [showNoResults, setShowNoResults] = useState(false);
@@ -115,6 +115,8 @@ export const Productos = () => {
                                 price={producto.price}
                                 image={producto.image}
                                 category={producto.category}
+                                navigation={navigation} 
+                                id={producto.id} 
                             />
                         ))
                     )}

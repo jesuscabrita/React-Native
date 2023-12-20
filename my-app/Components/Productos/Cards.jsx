@@ -4,7 +4,10 @@ import { COLORS } from '../../utils/constants';
 
 const LeftContent = props => <Avatar.Icon {...props} icon="shopping" />
 
-export const Cards = ({title, image, price, description, category }) => {
+export const Cards = ({title, image, price, description, category, navigation, id }) => {
+    const handleCardPress = () => {
+        navigation.navigate('ProductDetails', { productId: id, title, image, price, description, category });
+    };
     return(
         <Card style={{width:'100%',padding:'6px',fontFamily: 'Montserrat_400Bold'}}>
             <Card.Title title={title} subtitle={category} left={LeftContent} style={{fontFamily: 'Montserrat_400Bold'}} />
@@ -15,8 +18,9 @@ export const Cards = ({title, image, price, description, category }) => {
             <Text variant="bodyMedium" style={{fontFamily: 'Montserrat_400Bold'}}>{description}</Text>
             <Text variant="titleLarge" style={{fontFamily: 'Montserrat_400Bold', color:COLORS.green, fontSize:'30px', fontWeight:'900'}}>{price}</Text>
             <Card.Actions>
-            {/* <Button>Cancel</Button>
-            <Button>Ok</Button> */}
+            <Card.Actions>
+                <Button onPress={handleCardPress}>Ver Detalles</Button>
+            </Card.Actions>
             </Card.Actions>
         </Card>
     )
