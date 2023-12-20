@@ -56,68 +56,70 @@ export const Productos = () => {
     };
 
     return (
-        <ScrollView>
-            <View style={StylesScreen2.container}>
-                <View style={{ display: 'flex', flexDirection: 'row', width: '100%' }}>
-                    <TextInput
-                        label="Buscar por título"
-                        value={searchTerm}
-                        onChangeText={(text) => setSearchTerm(text)}
-                        style={{ width: '80%' }}
-                    />
-                    <IconButton
-                        icon="magnify"
-                        onPress={handleSearch}
-                        style={{ width: searchTerm !== '' ? '10%' : '20%', justifyContent: 'center', alignItems: 'center' }}
-                    />
-                    {searchTerm !== '' && (
-                        <IconButton
-                            icon="close-circle"
-                            onPress={handleClear}
-                            style={{ width: '10%', justifyContent: 'center', alignItems: 'center' }}
+        <SafeAreaView style={{ flex: 1 }}>
+            <ScrollView>
+                <View style={StylesScreen2.container}>
+                    <View style={{ display: 'flex', flexDirection: 'row', width: '100%', fontFamily: 'Montserrat_400Bold' }}>
+                        <TextInput
+                            label="Buscar por título"
+                            value={searchTerm}
+                            onChangeText={(text) => setSearchTerm(text)}
+                            style={{ width: '80%' }}
                         />
+                        <IconButton
+                            icon="magnify"
+                            onPress={handleSearch}
+                            style={{ width: searchTerm !== '' ? '10%' : '20%', justifyContent: 'center', alignItems: 'center' }}
+                        />
+                        {searchTerm !== '' && (
+                            <IconButton
+                                icon="close-circle"
+                                onPress={handleClear}
+                                style={{ width: '10%', justifyContent: 'center', alignItems: 'center' }}
+                            />
+                        )}
+                    </View>
+                    <View>
+                        <SafeAreaView style={{flex: 1,alignItems: 'center' }}>
+                            <SegmentedButtons
+                                value={value}
+                                onValueChange={(category) => handleCategoryChange(category)}
+                                buttons={[
+                                { value: 'Electronicos', label: 'Electronicos'},
+                                { value: 'Muebles', label: 'Muebles'},
+                                { value: 'Libros', label: 'Libros' },
+                                { value: 'Ropa y Calzado', label: 'Ropa y Calzado' },
+                                ]}
+                                style={{width: '80px', display: 'flex', justifyContent: 'center', fontFamily: 'Montserrat_400Bold'}}
+                            />
+                        </SafeAreaView>
+                    </View>
+                    {showChip && (
+                        <View style={{ flexDirection: 'row', flexWrap: 'wrap', marginTop: 10, fontFamily: 'Montserrat_400Bold' }}>
+                            <Chip mode="outlined" onClose={handleClear}>
+                                {searchTerm}
+                            </Chip>
+                        </View>
+                    )}
+                    {showNoResults ? (
+                        <View style={{ alignItems: 'center', marginTop: 10 }}>
+                            <Text style={{fontFamily: 'Montserrat_400Bold'}} >No hay resultados</Text>
+                            <Button style={{fontFamily: 'Montserrat_400Bold'}} onPress={handleClear}>Borrar filtro</Button>
+                        </View>
+                    ) : (
+                        filteredData.map((producto) => (
+                            <Cards
+                                key={producto.id}
+                                title={producto.title}
+                                description={producto.description}
+                                price={producto.price}
+                                image={producto.image}
+                                category={producto.category}
+                            />
+                        ))
                     )}
                 </View>
-                <View>
-                    <SafeAreaView style={{flex: 1,alignItems: 'center' }}>
-                        <SegmentedButtons
-                            value={value}
-                            onValueChange={(category) => handleCategoryChange(category)}
-                            buttons={[
-                            { value: 'Electronicos', label: 'Electronicos'},
-                            { value: 'Muebles', label: 'Muebles'},
-                            { value: 'Libros', label: 'Libros' },
-                            { value: 'Ropa y Calzado', label: 'Ropa y Calzado' },
-                            ]}
-                            style={{width: '80px', display: 'flex', justifyContent: 'center'}}
-                        />
-                    </SafeAreaView>
-                </View>
-                {showChip && (
-                    <View style={{ flexDirection: 'row', flexWrap: 'wrap', marginTop: 10 }}>
-                        <Chip mode="outlined" onClose={handleClear}>
-                            {searchTerm}
-                        </Chip>
-                    </View>
-                )}
-                {showNoResults ? (
-                    <View style={{ alignItems: 'center', marginTop: 10 }}>
-                        <Text>No hay resultados</Text>
-                        <Button onPress={handleClear}>Borrar filtro</Button>
-                    </View>
-                ) : (
-                    filteredData.map((producto) => (
-                        <Cards
-                            key={producto.id}
-                            title={producto.title}
-                            description={producto.description}
-                            price={producto.price}
-                            image={producto.image}
-                            category={producto.category}
-                        />
-                    ))
-                )}
-            </View>
-        </ScrollView>
+            </ScrollView>
+        </SafeAreaView>
     );
 };
