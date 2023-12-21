@@ -4,6 +4,9 @@ import { StylesScreen2 } from '../../Styles/styles';
 import { TextInput, IconButton, Chip, Button, Text, SegmentedButtons } from 'react-native-paper'; 
 import data from '../../lib/product.json';
 import { Cards } from './Cards';
+import { useDispatch } from 'react-redux';
+import { agregarProductoAlCarrito } from '../../redux/reducers/carritoActions';
+import { ModalSuccess } from '../Shared/ModalSucces';
 
 export const Productos = ({ navigation }) => {
     const [searchTerm, setSearchTerm] = useState('');
@@ -12,6 +15,12 @@ export const Productos = ({ navigation }) => {
     const [showChip, setShowChip] = useState(false);
     const [value, setValue] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('');
+    const [modalOpen, setModalOpen] = useState(false);
+    const dispatch = useDispatch();
+
+    const handleAgregarAlCarrito = (producto) => {
+        dispatch(agregarProductoAlCarrito(producto));
+    };
 
     useEffect(() => {
         handleSearch();
@@ -117,10 +126,13 @@ export const Productos = ({ navigation }) => {
                                 category={producto.category}
                                 navigation={navigation} 
                                 id={producto.id} 
+                                onAgregarAlCarrito={() => handleAgregarAlCarrito(producto)}
+                                setModalOpen={setModalOpen}
                             />
                         ))
                     )}
                 </View>
+                {modalOpen && <ModalSuccess setVisible={setModalOpen} visible={modalOpen} handleClick={()=>{setModalOpen(!modalOpen)}}/>}
             </ScrollView>
         </SafeAreaView>
     );

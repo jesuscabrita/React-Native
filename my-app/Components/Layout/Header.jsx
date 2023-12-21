@@ -12,12 +12,6 @@ export const Header = ({ activeScreen, navigation }) => {
         setShowBackButton(activeScreen !== 'Home');
     }, [activeScreen]);
 
-    useEffect(() => {
-        if (activeScreen === 'Home') {
-            setShowBackButton(false);
-        }
-    }, [activeScreen]);
-
     return (
         <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', backgroundColor: 'rgb(103, 80, 164)', height: '80px', paddingHorizontal: 16 }}>
             {showBackButton && (
@@ -28,7 +22,7 @@ export const Header = ({ activeScreen, navigation }) => {
                 </TouchableOpacity>
             )}
             <Text style={{ fontSize: 20, color: 'white', fontFamily: 'Montserrat_700Bold' }}>
-                {activeScreen === 'Home' ? 'Home' : 'Productos'}
+                {activeScreen === 'Home' ? 'Home' : activeScreen === 'Productos' ? 'Productos' : 'Carrito'}
             </Text>
         </View>
     );

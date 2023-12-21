@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ScrollView, Text, View } from 'react-native';
+import { ScrollView, Text, View, SafeAreaView } from 'react-native';
 import { TextInput, Button, List, IconButton } from 'react-native-paper';
 import { handleAdd, handleDelete } from '../../utils/utils';
 import { styles } from '../../Styles/styles';
@@ -13,44 +13,46 @@ export const Home = () => {
     const [selectedItemId, setSelectedItemId] = useState(null);
 
     return (
-        <ScrollView>
-            <View style={styles.container}>
-                <View style={styles.inputContainer}>
-                    <TextInput
-                        label="Personas"
-                        value={text}
-                        onChangeText={(text) => setText(text)}
-                        style={styles.input}
+        <SafeAreaView style={{ flex: 1 }}>
+            <ScrollView>
+                <View style={styles.container}>
+                    <View style={styles.inputContainer}>
+                        <TextInput
+                            label="Personas"
+                            value={text}
+                            onChangeText={(text) => setText(text)}
+                            style={styles.input}
+                        />
+                        <Button mode="contained" onPress={() => handleAdd(text, names, setNames, setText)} style={{fontFamily: 'Montserrat_400Bold'}}>
+                            Añadir
+                        </Button>
+                    </View>
+                    <View style={styles.listContainer}>
+                        {names.length === 0 ? (
+                            <View style={styles.emptyListContainer}>
+                                <Text style={styles.emptyListText}>No hay personas</Text>
+                                <IconButton icon="account-remove" size={30} color="#000" />
+                            </View>
+                        ) : (
+                            <List.Section>
+                                <ListNames names={names} setModalDelete={setModalDelete} setNames={setNames} setSelectedItemId={setSelectedItemId} />
+                            </List.Section>
+                        )}
+                    </View>
+                </View>
+                {modalDelete && (
+                    <Modal
+                        setVisible={setModalDelete}
+                        visible={modalDelete}
+                        handleDelete={() => {
+                            if (selectedItemId) {
+                                handleDelete(selectedItemId, names, setNames);
+                                setModalDelete(false);
+                            }
+                        }}
                     />
-                    <Button mode="contained" onPress={() => handleAdd(text, names, setNames, setText)} style={{fontFamily: 'Montserrat_400Bold'}}>
-                        Añadir
-                    </Button>
-                </View>
-                <View style={styles.listContainer}>
-                    {names.length === 0 ? (
-                        <View style={styles.emptyListContainer}>
-                            <Text style={styles.emptyListText}>No hay personas</Text>
-                            <IconButton icon="account-remove" size={30} color="#000" />
-                        </View>
-                    ) : (
-                        <List.Section>
-                            <ListNames names={names} setModalDelete={setModalDelete} setNames={setNames} setSelectedItemId={setSelectedItemId} />
-                        </List.Section>
-                    )}
-                </View>
-            </View>
-            {modalDelete && (
-                <Modal
-                    setVisible={setModalDelete}
-                    visible={modalDelete}
-                    handleDelete={() => {
-                        if (selectedItemId) {
-                            handleDelete(selectedItemId, names, setNames);
-                            setModalDelete(false);
-                        }
-                    }}
-                />
-            )}
-        </ScrollView>
+                )}
+            </ScrollView>
+        </SafeAreaView>
     );
 };

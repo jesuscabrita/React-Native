@@ -112,3 +112,61 @@ export const stylesDetalle = StyleSheet.create({
         backgroundColor: '#4CAF50',
     },
 });
+
+export const stylesCarrito = StyleSheet.create({
+    container: {
+        flex: 1,
+        padding: 16,
+    },
+    productoContainer: {
+        flexDirection: 'row',
+        marginBottom: 16,
+        borderBottomWidth: 1,
+        borderBottomColor: '#ddd',
+        paddingBottom: 8,
+    },
+    imagenProducto: {
+        width: 80,
+        height: 80,
+        marginRight: 16,
+    },
+    detalleProducto: {
+        flex: 1,
+    },
+    tituloProducto: {
+        fontSize: 18,
+        fontWeight: 'bold',
+    },
+    precioProducto: {
+        fontSize: 16,
+    },
+    cantidadProducto: {
+        fontSize: 16,
+    },
+    textoVacio: {
+        fontSize: 18,
+        textAlign: 'center',
+        marginTop: 50,
+    },
+    resumenContainer: {
+        marginTop: 20,
+        alignItems: 'center',
+    },
+    totalCompra: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        marginBottom: 8,
+    },
+    cantidadContainerB:{
+        display:'flex',
+        flexDirection:'row',
+        justifyContent:'flex-end',
+        alignItems:'center',
+        gap:'5px',
+    },
+    cantidadContainer:{
+        display:'flex',
+        flexDirection:'row',
+        alignItems:'center',
+    }
+});

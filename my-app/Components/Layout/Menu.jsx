@@ -4,6 +4,8 @@ import { Home } from "../Home/Home";
 import { Productos } from "../Productos/Productos";
 import { ProductDetails } from "../ProductDetails/ProductDetails";
 import { createStackNavigator } from '@react-navigation/stack';
+import { CarritoStack } from '../Carrito/CarritoStack';
+import { useSelector } from 'react-redux';
 
 const Tab = createMaterialBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -18,6 +20,9 @@ const ProductosStack = () => {
 }
 
 export const Menu = ({ activeScreen, onTabPress, navigation }) => {
+  const productosEnCarrito = useSelector((state) => state.carrito.productos);
+  const cantidadEnCarrito = productosEnCarrito.reduce((total, producto) => total + producto.quantity, 0);
+
   return (
     <Tab.Navigator>
       <Tab.Screen
@@ -34,6 +39,18 @@ export const Menu = ({ activeScreen, onTabPress, navigation }) => {
         options={{ tabBarLabel: 'Productos', tabBarIcon: 'page-layout-body' }}
         listeners={({ navigation }) => ({
           tabPress: (e) => { onTabPress('Productos') },
+        })}
+      />
+      <Tab.Screen
+        name="Carrito"
+        component={CarritoStack}
+        options={{
+          tabBarLabel: 'Carrito',
+          tabBarIcon: 'cart',
+          tabBarBadge: cantidadEnCarrito > 0 ? cantidadEnCarrito : null,
+        }}
+        listeners={({ navigation }) => ({
+          tabPress: (e) => { onTabPress('Carrito') },
         })}
       />
     </Tab.Navigator>
