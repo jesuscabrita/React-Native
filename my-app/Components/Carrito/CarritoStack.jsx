@@ -33,7 +33,7 @@ export const CarritoStack = () => {
                 {productosEnCarrito.length > 0 ? (
                     <FlatList
                         data={productosEnCarrito}
-                        keyExtractor={(item) => item.id.toString()}
+                        keyExtractor={(item) => item.id}
                         renderItem={({ item }) => (
                             <View style={stylesCarrito.productoContainer}>
                                 <Image source={{ uri: item.image }} style={stylesCarrito.imagenProducto} />
