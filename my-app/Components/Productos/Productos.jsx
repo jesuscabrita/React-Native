@@ -68,7 +68,7 @@ export const Productos = ({ navigation }) => {
         <SafeAreaView style={{ flex: 1 }}>
             <ScrollView>
                 <View style={StylesScreen2.container}>
-                    <View style={{ display: 'flex', flexDirection: 'row', width: '100%', fontFamily: 'Montserrat_400Bold' }}>
+                    <View style={{ display: 'flex', flexDirection: 'row', width: '100%', fontFamily: 'Montserrat_400Regular' }}>
                         <TextInput
                             label="Buscar por título"
                             value={searchTerm}
@@ -99,12 +99,12 @@ export const Productos = ({ navigation }) => {
                                 { value: 'Libros', label: 'Libros' },
                                 { value: 'Ropa y Calzado', label: 'Ropa y Calzado' },
                                 ]}
-                                style={{width: '80px', display: 'flex', justifyContent: 'center', fontFamily: 'Montserrat_400Bold'}}
+                                style={{width: '80px', display: 'flex', justifyContent: 'center', fontFamily: 'Montserrat_400Regular'}}
                             />
                         </SafeAreaView>
                     </View>
                     {showChip && (
-                        <View style={{ flexDirection: 'row', flexWrap: 'wrap', marginTop: 10, fontFamily: 'Montserrat_400Bold' }}>
+                        <View style={{ flexDirection: 'row', flexWrap: 'wrap', marginTop: 10, fontFamily: 'Montserrat_400Regular' }}>
                             <Chip mode="outlined" onClose={handleClear}>
                                 {searchTerm}
                             </Chip>
@@ -112,8 +112,8 @@ export const Productos = ({ navigation }) => {
                     )}
                     {showNoResults ? (
                         <View style={{ alignItems: 'center', marginTop: 10 }}>
-                            <Text style={{fontFamily: 'Montserrat_400Bold'}} >No hay resultados</Text>
-                            <Button style={{fontFamily: 'Montserrat_400Bold'}} onPress={handleClear}>Borrar filtro</Button>
+                            <Text style={{fontFamily: 'Montserrat_400Regular'}} >No hay resultados</Text>
+                            <Button style={{fontFamily: 'Montserrat_400Regular'}} onPress={handleClear}>Borrar filtro</Button>
                         </View>
                     ) : (
                         filteredData.map((producto) => (

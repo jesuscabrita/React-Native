@@ -20,17 +20,17 @@ export const Cards = ({title, image, price, description, category, navigation, i
     };
 
     return (
-        <Card style={{ width: '100%', padding: 16, fontFamily: 'Montserrat_400Bold' }}>
+        <Card style={{ width: '100%', padding: 16, fontFamily: 'Montserrat_400Regular' }}>
             <Card.Cover source={{ uri: image }} />
-            <Card.Title title={title} subtitle={category} left={LeftContent} style={{ fontFamily: 'Montserrat_400Bold' }} />
+            <Card.Title title={title} subtitle={category} left={LeftContent} style={{ fontFamily: 'Montserrat_400Regular' }} />
             <Card.Content>
-                <Text variant="titleLarge" style={{ fontFamily: 'Montserrat_400Bold', color: COLORS.primary, fontSize: 20 }}>
+                <Text variant="titleLarge" style={{ fontFamily: 'Montserrat_400Regular', color: COLORS.primary, fontSize: 20 }}>
                     {title}
                 </Text>
-                <Text variant="bodyMedium" style={{ fontFamily: 'Montserrat_400Bold', marginBottom: 8 }}>
+                <Text variant="bodyMedium" style={{ fontFamily: 'Montserrat_400Regular', marginBottom: 8 }}>
                     {description}
                 </Text>
-                <Text variant="titleLarge" style={{ fontFamily: 'Montserrat_400Bold', color: COLORS.green, fontSize: 24, fontWeight: '900' }}>
+                <Text variant="titleLarge" style={{ fontFamily: 'Montserrat_400Regular', color: COLORS.green, fontSize: 24, fontWeight: '900' }}>
                     {price}
                 </Text>
             </Card.Content>

@@ -23,7 +23,7 @@ export const Home = () => {
                             onChangeText={(text) => setText(text)}
                             style={styles.input}
                         />
-                        <Button mode="contained" onPress={() => handleAdd(text, names, setNames, setText)} style={{fontFamily: 'Montserrat_400Bold'}}>
+                        <Button mode="contained" onPress={() => handleAdd(text, names, setNames, setText)} style={{fontFamily: 'Montserrat_400Regular'}}>
                             Añadir
                         </Button>
                     </View>
