@@ -6,6 +6,7 @@ import { ProductDetails } from "../ProductDetails/ProductDetails";
 import { createStackNavigator } from '@react-navigation/stack';
 import { CarritoStack } from '../Carrito/CarritoStack';
 import { useSelector } from 'react-redux';
+import { Profile } from '../Profile/Profile';
 
 const Tab = createMaterialBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -19,10 +20,17 @@ const ProductosStack = () => {
   );
 }
 
-export const Menu = ({ activeScreen, onTabPress, navigation }) => {
-  const productosEnCarrito = useSelector((state) => state.carrito.productos);
-  const cantidadEnCarrito = productosEnCarrito.reduce((total, producto) => total + producto.quantity, 0);
+const ProfileStack = () => {
+  return (
+    <Stack.Navigator headerMode="none">
+      <Stack.Screen name="Profile" component={Profile} />
+    </Stack.Navigator>
+  );
+}
 
+export const Menu = ({ activeScreen, onTabPress, navigation }) => {
+  const productosEnCarrito = useSelector((state) => state.carrito.productos || []);
+  const cantidadEnCarrito = productosEnCarrito.reduce((total, producto) => total + producto.quantity, 0);
   return (
     <Tab.Navigator>
       <Tab.Screen
@@ -53,6 +61,17 @@ export const Menu = ({ activeScreen, onTabPress, navigation }) => {
           tabPress: (e) => { onTabPress('Carrito') },
         })}
       />
+        <Tab.Screen
+          name="Profile"
+          component={ProfileStack}
+          options={{
+            tabBarLabel: 'Profile',
+            tabBarIcon: 'account-circle',
+          }}
+          listeners={({ navigation }) => ({
+            tabPress: (e) => { onTabPress('Profile') },
+          })}
+        />
     </Tab.Navigator>
   );
 }

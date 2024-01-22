@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { ScrollView, View, SafeAreaView } from 'react-native';
 import { StylesScreen2 } from '../../Styles/styles';
-import { TextInput, IconButton, Chip, Button, Text, SegmentedButtons } from 'react-native-paper'; 
-import data from '../../lib/product.json';
+import { TextInput, IconButton, Chip, Button, Text, SegmentedButtons, ActivityIndicator, Icon } from 'react-native-paper'; 
 import { Cards } from './Cards';
 import { useDispatch } from 'react-redux';
 import { agregarProductoAlCarrito } from '../../redux/reducers/carritoActions';
 import { ModalSuccess } from '../Shared/ModalSucces';
+import { useGetProductsQuery } from '../../service/api';
 
 export const Productos = ({ navigation }) => {
     const [searchTerm, setSearchTerm] = useState('');
@@ -17,6 +17,13 @@ export const Productos = ({ navigation }) => {
     const [selectedCategory, setSelectedCategory] = useState('');
     const [modalOpen, setModalOpen] = useState(false);
     const dispatch = useDispatch();
+    const { data: product, isError, isLoading } = useGetProductsQuery();
+
+    useEffect(() => {
+        if (product) {
+            setFilteredData(product);
+        }
+    }, [product]);
 
     const handleAgregarAlCarrito = (producto) => {
         dispatch(agregarProductoAlCarrito(producto));
@@ -28,7 +35,7 @@ export const Productos = ({ navigation }) => {
     }, [selectedCategory]);
 
     const handleSearch = () => {
-        let newFilteredData = data.filter((producto) =>
+        let newFilteredData = product?.filter((producto) =>
             producto.title.toLowerCase().includes(searchTerm.toLowerCase())
         );
 
@@ -39,8 +46,8 @@ export const Productos = ({ navigation }) => {
         }
 
         setFilteredData(newFilteredData);
-        setShowNoResults(newFilteredData.length === 0);
-        setShowChip(newFilteredData.length > 0);
+        setShowNoResults(newFilteredData && newFilteredData.length === 0);
+        setShowChip(newFilteredData && newFilteredData.length > 0);
         if (searchTerm === '') {
             setShowChip(false);
         }
@@ -48,7 +55,7 @@ export const Productos = ({ navigation }) => {
 
     const handleClear = () => {
         setSearchTerm('');
-        setFilteredData(data);
+        setFilteredData(product);
         setShowNoResults(false);
         setShowChip(false);
         setSelectedCategory('')
@@ -63,6 +70,31 @@ export const Productos = ({ navigation }) => {
             setSelectedCategory(category);
         }
     };
+
+    if (isLoading) {
+        return (
+            <SafeAreaView style={{ flex: 1 }}>
+                <ScrollView contentContainerStyle={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                    <View>
+                        <ActivityIndicator size="large" color="rgb(103, 80, 164)" />
+                    </View>
+                </ScrollView>
+            </SafeAreaView>
+        )
+    }
+
+    if (isError) {
+        return (
+            <SafeAreaView style={{ flex: 1 }}>
+                <ScrollView contentContainerStyle={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                    <View>
+                        <Icon name="alert" size={50} color="red" />
+                        <Text style={{ marginTop: 10, fontFamily: 'Montserrat_400Regular' }}>Error al cargar productos</Text>
+                    </View>
+                </ScrollView>
+            </SafeAreaView>
+        );
+    }
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
@@ -116,7 +148,7 @@ export const Productos = ({ navigation }) => {
                             <Button style={{fontFamily: 'Montserrat_400Regular'}} onPress={handleClear}>Borrar filtro</Button>
                         </View>
                     ) : (
-                        filteredData.map((producto) => (
+                        filteredData && filteredData.map((producto) => (
                             <Cards
                                 key={producto.id}
                                 title={producto.title}
@@ -132,7 +164,7 @@ export const Productos = ({ navigation }) => {
                         ))
                     )}
                 </View>
-                {modalOpen && <ModalSuccess setVisible={setModalOpen} visible={modalOpen} handleClick={()=>{setModalOpen(!modalOpen)}}/>}
+                {modalOpen && <ModalSuccess texto={'Producto añadido al carrito'} setVisible={setModalOpen} visible={modalOpen} handleClick={()=>{setModalOpen(!modalOpen)}}/>}
             </ScrollView>
         </SafeAreaView>
     );

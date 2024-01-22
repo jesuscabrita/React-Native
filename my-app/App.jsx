@@ -6,6 +6,11 @@ import { useFonts, Montserrat_400Regular, Montserrat_700Bold } from '@expo-googl
 import { NavigationContainer } from '@react-navigation/native';
 import { Provider } from 'react-redux';
 import store from './redux/store';
+import { Login } from './Components/Login/Login';
+import { createStackNavigator } from '@react-navigation/stack';
+import { Profile } from './Components/Profile/Profile';
+
+const Stack = createStackNavigator();
 
 const App = () => {
   const [fontsLoaded] = useFonts({
@@ -22,7 +27,10 @@ const App = () => {
       <SafeAreaProvider>
         <PaperProvider theme={DefaultTheme}>
           <NavigationContainer>
-            <Layout />
+            <Stack.Navigator initialRouteName="Login" headerMode="none">
+              <Stack.Screen name="Login" component={Login} />
+              <Stack.Screen name="App" component={Layout} />
+            </Stack.Navigator>
           </NavigationContainer>
         </PaperProvider>
       </SafeAreaProvider>

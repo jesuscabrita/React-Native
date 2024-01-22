@@ -39,7 +39,7 @@ export const ProductDetails = ({ route }) => {
                 </Button>
                 </View>
             </ScrollView>
-            {modalOpen && <ModalSuccess setVisible={setModalOpen} visible={modalOpen} handleClick={()=>{setModalOpen(!modalOpen)}}/>}
+            {modalOpen && <ModalSuccess texto={'Producto añadido al carrito'} setVisible={setModalOpen} visible={modalOpen} handleClick={()=>{setModalOpen(!modalOpen)}}/>}
         </SafeAreaView>
     );
 };
